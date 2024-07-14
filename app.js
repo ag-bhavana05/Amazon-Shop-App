@@ -18,18 +18,17 @@ app.use(cookieParser(""));
 app.use(cors());
 app.use(router);
 
-// if(process.env.NODE_ENV === "production"){
+if(process.env.NODE_ENV === "production"){
+    app.get("/", (req,res) => {
+        app.use(express.static(path.resolve(__dirname, "client", "build")));
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+}
+
+// app.get("/", (req, res) => {
 //     app.use(express.static(path.join(__dirname, "/client/build")));
-
-//     app.get("*", (req,res) => {
-//         res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-//     });
-// }
-
-app.get("/", (req, res) => {
-    app.use(express.static(path.join(__dirname, "/client/build")));
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+//     res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
 
 const port = process.env.PORT || 8005;
 

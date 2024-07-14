@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
 
-const DB = process.env.DATABASE;
+const {DATABASE} = require("../config/keys");
 
-mongoose.connect(DB).then(()=> console.log("database connected")).catch((error)=> console.log("error" + error.message))
+mongoose.connect(DATABASE).then(() => console.log("database connected")).catch((error) => console.log("error" + error.message))

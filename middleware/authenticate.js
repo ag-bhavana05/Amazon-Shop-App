@@ -1,12 +1,13 @@
 const jwt = require("jsonwebtoken");
 const USER = require("../models/userSchema");
-const secretKey = process.env.KEY;
+const {KEY} = require("../config/keys");
+// const secretKey = process.env.KEY;
 
 const authenticate = async(req,res,next) => {
     try {
         const token = req.cookies.Amazonweb;
 
-        const verifyToken = jwt.verify(token,secretKey);
+        const verifyToken = jwt.verify(token, KEY);
         console.log(verifyToken);
 
         const rootUser = await USER.findOne({_id : verifyToken._id, "tokens.token" : token});
